@@ -1,0 +1,65 @@
+.search-main-div{
+    background: rgba(97, 97, 97, 0.67);
+    border-radius: 9px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.3px);
+    -webkit-backdrop-filter: blur(1.1px);
+    border: 1px solid rgba(97, 97, 97, 0.099);
+    font-family: "ECA Regular",sans-serif;
+    display: flex;
+    justify-content: space-between;
+    width: 85vw;
+    margin: 7.5vw;
+    margin-top: 2vw;
+    margin-bottom: 5vw;
+    top: 0;
+    color: white;
+}
+.form > input {
+    font-family: "ECA Regular",sans-serif;
+    font-weight: 500;
+    background-color: transparent;
+    border-color:transparent;
+    color: white;
+    padding:6px ;
+    margin: 10px;
+    margin-top: 13px;
+    width: 50vw;
+}
+.form > button {
+    font-family: "ECA Regular",sans-serif;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-weight: 500;
+    padding: 9px;
+    border: solid 1px white;
+    border-radius: 8px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+::placeholder{
+    color: white;
+}
+.form > input:active{
+    border: none;
+}
+.search-icon{
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 1.65rem;
+}
+
+@media only screen and (max-width: 425px) {
+    .form > input {
+        margin: 10px;
+        width: 40vw;
+    }
+    .search-icon{
+        font-size: 1.2rem;
+    }
+    .form > button {
+        margin-right: 10px;
+    }
+}

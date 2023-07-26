@@ -1,38 +1,52 @@
-.App {
-  text-align: center;
+@font-face {
+    font-family: "ECA Regular";
+    src: url('./fonts/ECA-regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: "ECA Regular";
+    src: url('./fonts/ECA-bold.ttf') format('truetype');
+    font-weight: 600;
+}
+@font-face {
+    font-family: "ECA Regular";
+    src: url('./fonts/ECA-semibold.ttf') format('truetype');
+    font-weight: 500;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+    font-family: "ECA Regular",sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background: url('https://picsum.photos/2160/3840');
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    overflow: hidden; */
+    background: rgb(164,251,202);
+    background: -moz-linear-gradient(90deg, rgba(164,251,202,1) 0%, rgba(1,116,194,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(164,251,202,1) 0%, rgba(1,116,194,1) 100%);
+    background: linear-gradient(90deg, rgba(164,251,202,1) 0%, rgba(1,116,194,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a4fbca",endColorstr="#0174c2",GradientType=1);    
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+    width: 0.4rem;
+   
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
   }
-  to {
-    transform: rotate(360deg);
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+    border-radius: 5px;
+    box-shadow: 0.1rem 0 0.5rem #555;
   }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b6b6b6;
 }

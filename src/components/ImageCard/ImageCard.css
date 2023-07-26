@@ -1,0 +1,35 @@
+.image-card{
+    background: none;
+    border: none;
+    padding: 0;
+    border-radius: 9px;
+    text-align: center;
+    margin: 8px;
+}
+
+.image-card-image{
+    max-height: 24.5vw;
+    max-width: 24.5vw;
+    border-radius: 5px;
+    margin: 5px;
+    object-fit: contain;
+    overflow: clip;
+    overflow-clip-margin: content-box;
+}
+.image-card-tags{
+    width: 70%;
+    margin-left:15%;
+    margin-right: 15%; 
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+@media only screen and (max-width: 425px) {
+    .image-card{
+        display: block;
+    }
+    .image-card-image{
+        max-height: 85.5vw;
+        max-width: 85.5vw;        
+    }
+}

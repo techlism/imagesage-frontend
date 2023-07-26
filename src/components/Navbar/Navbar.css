@@ -1,0 +1,54 @@
+.nav-main-div{
+  background: rgba(97, 97, 97, 0.67);
+  border-radius: 9px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1.3px);
+  -webkit-backdrop-filter: blur(1.1px);
+  border: 1px solid rgba(97, 97, 97, 0.099);
+  font-family: "ECA Regular",sans-serif;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  width: 94vw;
+  margin: 3vw;
+  margin-top: 2vw;
+  margin-bottom: 10vw;
+  position: sticky;
+  top: 0;
+  color: white;
+}
+.nav-logo > img{
+  max-height: 100px;
+  max-width: 100px;
+  margin-top: 11px;
+  margin-left: 10px;
+
+}
+.nav-contents{
+  display: flex;
+  justify-content: space-evenly;
+}
+.nav-contents > button {
+  font-family: 'ECA Regular',sans-serif;
+  background-color: transparent;
+  border: none;
+  margin: 10px;
+  margin-right: 15px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-contents > button {
+    margin: 7px;
+    font-size: 0.8rem;
+  }
+  .nav-logo > img{
+    max-height: 70px;
+    max-width: 70px;
+    margin-top: 7px;
+    margin-left: 7px;
+  }
+}

@@ -1,0 +1,10 @@
+.notfound-div{
+    display: block;
+    text-align: center;
+    height: 80vh;
+}
+#searching-error{
+    margin: 5px;
+    max-height: 30vw;
+    max-width: 30vw;
+}

@@ -1,0 +1,15 @@
+.title-desc{
+    display: block;
+    font-family: 'ECA Regular',sans-serif;
+}
+.title-desc > h2{
+   font-weight: 500;
+   color: black;
+   font-size: 1rem;
+   /* margin: 8px; */
+}
+.title-desc > h3{
+    color: rgb(170, 170, 170);
+    font-size: 0.7rem;
+    /* margin: 4px; */
+}

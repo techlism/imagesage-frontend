@@ -1,0 +1,58 @@
+.modal{
+    display: block;
+    margin: auto;
+    font-family: 'ECA Regular',sans-serif;
+    text-align: center;
+}
+.image-preview > img {
+    border-radius: 8px;
+    max-height: 40vw;
+    max-width: 40vw;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(62, 57, 95);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+a > .downloadIcon {
+    color: #03de62;
+}
+.mainInfoDiv{
+    background-color: rgb(233, 236, 247);
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+.mainInfoDiv > h1 {
+    color :#1dbebe;
+    font-size: 1.25rem;
+    margin-top: 15px;
+    margin-bottom: 15px;    
+}
+
+.mainInfoDiv > div > h1  {
+    color :#1dbebe;
+    font-size: 1.25rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.info{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    text-align: unset;
+}
+.downloadLinks{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    text-align: unset;
+    padding-bottom: 20px;    
+}
+.image-card-tags > h3{
+    color: #1dbebe;
+}

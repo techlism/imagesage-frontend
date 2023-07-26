@@ -1,0 +1,10 @@
+.h1{
+    font-family: "ECA Regular";
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
