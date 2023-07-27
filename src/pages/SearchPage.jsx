@@ -5,11 +5,15 @@ import SearchBox from '../components/SeachBox/SearchBox';
 import LoadingAnimation from '../components/LoadingAnimation/LoadingAnimation';
 import NotFound from '../components/NotFoundIcon/NotFound';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleArrowLeft, faCircleArrowRight, faClose,faCopy,faShareAlt} from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowLeft, faCircleArrowRight, faClose,faCopy,faShareAlt, faStar} from '@fortawesome/free-solid-svg-icons';
 import styling from './SearchPage.module.css';
 import Modal from 'react-modal';
 import ImageModal from '../components/ImageModal/ImageModal';
 import Paragraph from '../components/Paragraph/Paragraph';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
+
+const rootUrl = 'https://imagesage.onrender.com';
 
 const customStyles = {
     content: {
@@ -21,7 +25,8 @@ const customStyles = {
       transform: 'translate(-50%, -50%)',
       maxWidth:'85vw',
       height:'75vh',
-      maxHeight:'max-content'
+      maxHeight:'max-content',
+      borderRadius:'8px'
     },
 };
 
@@ -36,20 +41,15 @@ const SearchPage = () => {
   const location = useLocation();
   let orginalquery = new URLSearchParams(location.search).get('q');
   let query = orginalquery.replace(/\s+/g, '+').trim();
-
+  const [acessToken, setAccessToken] = useState(null);
+  const { isAuthenticated, getAccessTokenSilently, user} = useAuth0();
+  const [isfavorite, setIsFavorite] = useState(false);
   useEffect(() => {
     // Function to fetch search results from Pixabay API
     const fetchSearchResults = async (query, page) => {
       try {
-        const key = process.env.REACT_APP_PIXABAY_KEY;
-        const apiUrl = `https://pixabay.com/api/?key=${key}&q=${query}&page=${page}`;
-        const response = await fetch(apiUrl);
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch search results');
-        }
-
-        const data = await response.json();
+        const response = await axios.get(`${rootUrl}?query=${query}&page=${page}`);
+        const data = response.data;
         setResults(data.hits);
         setTotalResults(data.totalHits);
         setLoading(false);
@@ -87,6 +87,7 @@ const SearchPage = () => {
     setSelectedImage(null);
     setIsModalOpen(false);
     setShareLink(null);
+    setIsFavorite(false);
   }
 
   const handleShare=(link)=>{
@@ -101,12 +102,69 @@ const SearchPage = () => {
         })
     }
     else{
-        alert('Copying not supported. Please copy manually.');
+        alert('Copying not supported in your Browser. Please copy manually.');
     }
-
 
   }
 
+  useEffect(() => {
+    const getToken = async () => {
+      const domain = "dev-jq0f41r6txfpceni.us.auth0.com";
+      try {
+        const accessToken = await getAccessTokenSilently({
+          authorizationParams: {
+            audience: `https://${domain}/api/v2/`,
+            scope: "read:current_user",
+          },
+        });  
+        setAccessToken(accessToken);
+      } catch (e) {
+        console.log(`Error from getToken : ${e.message}`);
+      }
+    };  
+    getToken();
+  }, [getAccessTokenSilently]);
+
+
+
+  useEffect(()=>{
+    const checkFav = async (id) =>{
+      const data = {imageId : id,email : user?.email};
+      if(isAuthenticated && acessToken){
+        try {
+          const findImage = await axios.post(`${rootUrl}/checkfav`,data,{
+            headers:{
+              Authorization: `Bearer ${acessToken}`
+            }
+          });
+          console.log(findImage);
+          if(findImage !== "User Not Found"){
+            setIsFavorite(findImage);
+          }
+        }
+        catch(error){
+          console.log(error);
+        }
+      }
+    }
+    selectedImage && checkFav(selectedImage.id);
+  },[selectedImage, isAuthenticated, acessToken,user?.email]);
+
+  const handleFavorite = async (id)=>{
+    try{
+      const data = {imageId : id,email : user?.email};
+      const response = await axios.post(`${rootUrl}/favorites`,data,{
+        headers:{
+          Authorization: `Bearer ${acessToken}`
+        }
+      });
+      console.log(response);
+      setIsFavorite(true);
+    }
+      catch (error) {
+        alert(`Error from Favorite Btn : ${error.message}`);
+      }
+    }
   return (
     <div>
       <SearchBox />
@@ -150,9 +208,9 @@ const SearchPage = () => {
             {/* Div that holds close button, share button and favorite button. */}
             <div className={styling.closeShareBtnDiv}>
                 <button onClick={handleCloseModal} className={styling.closebtn}><FontAwesomeIcon icon={faClose}/></button>
+                <button onClick={()=>{handleFavorite(selectedImage.id)}} className={styling.favbtn}><FontAwesomeIcon icon={faStar} style={{color:isfavorite ? '#f09d05' : 'black'}}/></button>
                 <button onClick={()=>handleShare(selectedImage.pageURL)} className={styling.sharebtn}><FontAwesomeIcon icon={faShareAlt}></FontAwesomeIcon></button>
             </div>
-
                 {shareLink !== null && 
                     <div className={styling.shareDiv}>
                         <p>{shareLink}</p>
@@ -160,13 +218,10 @@ const SearchPage = () => {
                     </div>
                 }
                 <div>
-                    <ImageModal result={selectedImage}/>
+                    <ImageModal result={selectedImage} token={acessToken}/>
                 </ div>
             </>
-
-
-            }
-            
+            }            
         </Modal>
       <div
         className={styling.buttonsDiv}

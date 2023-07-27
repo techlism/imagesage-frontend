@@ -10,13 +10,17 @@
     max-width: 40vw;
 }
 
-a{
-    text-decoration: none;
-    color: rgb(62, 57, 95);
-    font-weight: 500;
-    font-size: 0.9rem;
+.downloadLinks > button{
+    background-color: rgb(62, 57, 95);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    cursor: pointer;
 }
-a > .downloadIcon {
+.downloadLinks > button > .downloadIcon {
     color: #03de62;
 }
 .mainInfoDiv{
