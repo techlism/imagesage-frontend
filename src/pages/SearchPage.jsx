@@ -152,14 +152,19 @@ const SearchPage = () => {
 
   const handleFavorite = async (id)=>{
     try{
-      const data = {imageId : id,email : user?.email};
-      const response = await axios.post(`${rootUrl}/favorites`,data,{
-        headers:{
-          Authorization: `Bearer ${acessToken}`
-        }
-      });
-      console.log(response);
-      setIsFavorite(true);
+      if(isAuthenticated){
+        const data = {imageId : id,email : user?.email};
+        const response = await axios.post(`${rootUrl}/favorites`,data,{
+          headers:{
+            Authorization: `Bearer ${acessToken}`
+          }
+        });
+        console.log(response);
+        setIsFavorite(true);
+      }
+      else{
+        alert('You are not logged in');
+      }
     }
       catch (error) {
         alert(`Error from Favorite Btn : ${error.message}`);
