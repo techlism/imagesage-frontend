@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import { BrowserRouter,Routes, Route } from "react-router-dom";
 import { Auth0Provider } from '@auth0/auth0-react';
 import DashboardPage from './pages/DashboardPage.jsx';
+import HelmetExport from 'react-helmet';
 
 function App() {
   return (
@@ -17,6 +18,12 @@ function App() {
         }}
     >
         <div className="App">
+          <HelmetExport>
+            <meta charset="utf-8" />
+            <title>ImageSage</title>
+            <meta name='description' content='ImageSage - A stock photo marketplace'/>
+          </HelmetExport>
+
         <BrowserRouter>
         <Navbar/>
         <Routes>
