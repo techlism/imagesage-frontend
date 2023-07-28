@@ -122,8 +122,8 @@ const SearchPage = () => {
         console.log(`Error from getToken : ${e.message}`);
       }
     };  
-    getToken();
-  }, [getAccessTokenSilently]);
+    user && getToken();
+  }, [getAccessTokenSilently,user]);
 
 
 
