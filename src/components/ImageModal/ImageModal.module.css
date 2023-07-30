@@ -17,8 +17,9 @@
     border-radius: 8px;
     padding: 10px;
     font-weight: 600;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
     cursor: pointer;
+    margin-top: 10px;
 }
 .downloadLinks > button > .downloadIcon {
     color: #03de62;
@@ -51,10 +52,12 @@
     text-align: unset;
 }
 .downloadLinks{
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    text-align: unset;
+    text-align: unset; */
+    display: flex;
+    justify-content: center;
     padding-bottom: 20px;    
 }
 .image-card-tags > h3{

@@ -19,7 +19,7 @@ const Navbar = () => {
                 <div className="nav-logo"><button onClick={handleRef}><img src={logo} alt="imagesage-logo" /></button></div>
                 <div className="nav-contents">
                     <button onClick={isAuthenticated ? ()=>handleUser() : ()=>loginWithRedirect()}>{ isAuthenticated ? user.nickname : 'Login/Signup' }</button>
-                    <button onClick={()=>logout({logoutParams:{returnTo:'http://localhost:3000'}})}>Logout</button>
+                    <button onClick={()=>logout({logoutParams:{returnTo:window.location.origin}})} style={{visibility:isAuthenticated ? 'visible' : 'hidden'}}>Logout</button>
                 </div>
             </div>
         </nav>

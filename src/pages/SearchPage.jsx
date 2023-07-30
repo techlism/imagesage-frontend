@@ -183,7 +183,7 @@ const SearchPage = () => {
         {!loading ? (
           results.length > 0 ? (
             results.map((result) => (
-                <button className={styling['image-btn']}                         onClick={() => {
+                <button className={styling['image-btn']}  onClick={() => {
                     handleImageClick(result);
                     }}>
                     <ImageCard

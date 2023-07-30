@@ -5,15 +5,26 @@ import Tags from '../ImageCard/Tags';
 import TitleDesc from './TitleDesc.jsx';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 const ImageModal = (props)=>{
     const {isAuthenticated, user} = useAuth0();
     const rootUrl = 'https://imagesage.onrender.com';
+    useEffect(()=>{
+      console.log(props)
+    },[props]);
     
     const handleDownloads = async (id,hrefUrl)=>{
-        window.open(hrefUrl,'_blank');
-        const data = {imageId : id,email : user.email};
-        if(isAuthenticated && props.token){
+      console.log(hrefUrl);
+      if (hrefUrl) {
+        // Open the link in a new tab/window after a short delay
+        setTimeout(() => {
+          window.open(hrefUrl);
+        }, 150);
+      }        
+      if(isAuthenticated && props.token){
+          const data = {imageId : id,email : user?.email};
           try {
             const response = await axios.post(`${rootUrl}/downloads`,data,{
               headers:{
@@ -26,8 +37,9 @@ const ImageModal = (props)=>{
           catch (error) {
             alert(`Error in Download button : ${error.message}`);
           }
-        }
+        }       
       }
+      
 
     return(
         <div className={styling.modal}>
@@ -44,11 +56,11 @@ const ImageModal = (props)=>{
                     <TitleDesc heading={"Downloads"} desc={props.result.downloads} />
                     <TitleDesc heading={"Likes"} desc={props.result.likes} />
             </div>
-                <div><h1>Download Links</h1></div>
+                {/* <div><h1>Download Links</h1></div> */}
                 <div className={styling.downloadLinks}>
-                    <button onClick={()=>handleDownloads(props.result.id,props.result.largeImageURL)}>Big <FontAwesomeIcon icon={faDownload} className={styling.downloadIcon}/></button>                        
-                    <button onClick={()=>handleDownloads(props.result.id,props.result.fullHDURL)}>Medium <FontAwesomeIcon icon={faDownload} className={styling.downloadIcon}/></button>                        
-                    <button onClick={()=>handleDownloads(props.result.id,props.result.imageURL)}>Original <FontAwesomeIcon icon={faDownload} className={styling.downloadIcon}/></button>                        
+                    <button onClick={()=>handleDownloads(props.result.id,props.result.largeImageURL)}>Download <FontAwesomeIcon icon={faDownload} className={styling.downloadIcon}/></button>                        
+                    {/* <button onClick={()=>handleDownloads(props.result.id,props.result.fullHDURL)}>Medium <FontAwesomeIcon icon={faDownload} className={styling.downloadIcon}/></button>                        
+                    <button onClick={()=>handleDownloads(props.result.id,props.result.imageURL)}>Original <FontAwesomeIcon icon={faDownload} className={styling.downloadIcon}/></button>                         */}
 
                     {/* <a href={props.result.largeImageURL} download={'image.jpeg'} target='blank' onClick={()=>handleDownloads(props.result.id)}>Big <FontAwesomeIcon icon={faDownload} className={styling.downloadIcon}/></a> */}
 
