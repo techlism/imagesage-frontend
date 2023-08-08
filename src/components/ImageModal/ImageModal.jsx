@@ -11,12 +11,12 @@ import { useEffect } from 'react';
 const ImageModal = (props)=>{
     const {isAuthenticated, user} = useAuth0();
     const rootUrl = 'https://imagesage.onrender.com';
-    useEffect(()=>{
-      console.log(props)
-    },[props]);
+    // useEffect(()=>{
+    //   console.log(props)
+    // },[props]);
     
     const handleDownloads = async (id,hrefUrl)=>{
-      console.log(hrefUrl);
+      // console.log(hrefUrl);
       if (hrefUrl) {
         // Open the link in a new tab/window after a short delay
         setTimeout(() => {

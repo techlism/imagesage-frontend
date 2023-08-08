@@ -41,7 +41,7 @@ const SearchPage = () => {
   const location = useLocation();
   let orginalquery = new URLSearchParams(location.search).get('q');
   let query = orginalquery.replace(/\s+/g, '+').trim();
-  const [acessToken, setAccessToken] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
   const { isAuthenticated, getAccessTokenSilently, user} = useAuth0();
   const [isfavorite, setIsFavorite] = useState(false);
   useEffect(() => {
@@ -130,14 +130,14 @@ const SearchPage = () => {
   useEffect(()=>{
     const checkFav = async (id) =>{
       const data = {imageId : id,email : user?.email};
-      if(isAuthenticated && acessToken){
+      if(isAuthenticated && accessToken){
         try {
           const findImage = await axios.post(`${rootUrl}/checkfav`,data,{
             headers:{
-              Authorization: `Bearer ${acessToken}`
+              Authorization: `Bearer ${accessToken}`
             }
           });
-          console.log(findImage);
+          // console.log(accessToken);
           if(findImage !== "User Not Found"){
             setIsFavorite(findImage);
           }
@@ -148,18 +148,18 @@ const SearchPage = () => {
       }
     }
     selectedImage && checkFav(selectedImage.id);
-  },[selectedImage, isAuthenticated, acessToken,user?.email]);
+  },[selectedImage, isAuthenticated, accessToken,user?.email]);
 
   const handleFavorite = async (id)=>{
     try{
       if(isAuthenticated){
         const data = {imageId : id,email : user?.email};
-        const response = await axios.post(`${rootUrl}/favorites`,data,{
+        await axios.post(`${rootUrl}/favorites`,data,{
           headers:{
-            Authorization: `Bearer ${acessToken}`
+            Authorization: `Bearer ${accessToken}`
           }
         });
-        console.log(response);
+        // console.log(response);
         setIsFavorite(true);
       }
       else{
@@ -223,7 +223,7 @@ const SearchPage = () => {
                     </div>
                 }
                 <div>
-                    <ImageModal result={selectedImage} token={acessToken}/>
+                    <ImageModal result={selectedImage} token={accessToken}/>
                 </ div>
             </>
             }            
