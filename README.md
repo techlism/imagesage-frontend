@@ -1,4 +1,5 @@
 # Frontend for a pixabay clone made using pixabay's api.
+Created with React
 How to get it running locally ? <br>
 Download/fork this repo to your machine. <br>
 cd into this repo <br>
